@@ -7,9 +7,9 @@ namespace Common.Data
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        internal DbContext _context;
+        internal PolicyDbContext _context;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(PolicyDbContext context)
         {
             _context = context;
         }

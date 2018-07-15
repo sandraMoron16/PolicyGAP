@@ -11,6 +11,7 @@ namespace Common.Data
 
         public GenericRepository(PolicyDbContext context)
         {
+           
             _context = context;
         }
 

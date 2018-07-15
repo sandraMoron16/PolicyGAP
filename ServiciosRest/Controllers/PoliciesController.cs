@@ -15,11 +15,12 @@ namespace ServiciosRest.Controllers
        
         private IGenericRepository<Policy> _policyRepo;
 
-
+     
         public PoliciesController()
         {
             this._policyRepo = new GenericRepository<Policy>(new PolicyDbContext());
-          
+       
+
         }
         public PoliciesController(IGenericRepository<Policy> policyRepo)
         {
@@ -109,5 +110,7 @@ namespace ServiciosRest.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+     
     }
 }

@@ -44,9 +44,9 @@
     <Compile Include="Data\IGenericRepository.cs" />
     <Compile Include="Data\PolicyDbContext.cs" />
     <Compile Include="Enums\Enums.cs" />
-    <Compile Include="Migrations\201807142018588_V1.cs" />
-    <Compile Include="Migrations\201807142018588_V1.Designer.cs">
-      <DependentUpon>201807142018588_V1.cs</DependentUpon>
+    <Compile Include="Migrations\201807150005583_Initialize.cs" />
+    <Compile Include="Migrations\201807150005583_Initialize.Designer.cs">
+      <DependentUpon>201807150005583_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\ApplicationRole.cs" />
@@ -70,8 +70,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807142018588_V1.resx">
-      <DependentUpon>201807142018588_V1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807150005583_Initialize.resx">
+      <DependentUpon>201807150005583_Initialize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

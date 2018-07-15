@@ -12,23 +12,23 @@ namespace ServiciosRest.Models
 {
     public  class PolicyDbContext: DbContext
     {
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
-        public DbSet<ApplicationRole> ApplicationRole { get; set; }
-        public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
-        public DbSet<Policy> Policies { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<AssignmentPolicy> AssignmentPolicies { get; set; }
-        public DbSet<CoverageType> CoverageTypes { get; set; }
 
+        static PolicyDbContext policyDbContext = new PolicyDbContext();
         public PolicyDbContext()
             : base(string.Format("name={0}", "PolicyConnection"))
         {
+            //Create();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         { 
             base.OnModelCreating(modelBuilder);
         }
-        
+
+        public static PolicyDbContext Create()
+        {
+            return new PolicyDbContext();
+           
+        }
     }
 }

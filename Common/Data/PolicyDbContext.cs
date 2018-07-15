@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace Common.Data
 {
     public  class PolicyDbContext: IdentityDbContext
-    {
+    {    
+
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<ApplicationRole> ApplicationRole { get; set; }
         public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
@@ -23,6 +24,7 @@ namespace Common.Data
         public PolicyDbContext()
             : base(string.Format("name={0}", "PolicyConnection"))
         {
+           
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 ﻿using Common.Data;
+using Common.Enums;
 using Common.Model;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace ServiciosRest.Controllers
     public class AssignmentPoliciesController : ApiController
     {
         private IGenericRepository<AssignmentPolicy> _assignmentPolicyRepo;
+        private IGenericRepository<Policy> _policyRepo;
         public AssignmentPoliciesController()
         {         
-            this._assignmentPolicyRepo = new GenericRepository<AssignmentPolicy>(new PolicyDbContext());
+            this._assignmentPolicyRepo = new GenericRepository<AssignmentPolicy>(new Common.Data.PolicyDbContext());
+            this._policyRepo = new GenericRepository<Policy>(new Common.Data.PolicyDbContext());
 
         }
         // GET: api/AssignmentPolicies   
@@ -23,6 +26,19 @@ namespace ServiciosRest.Controllers
         {
             try
             {
+                if (assignmentPolicy.PolicyId > 0)
+                {
+                    Policy policy = _policyRepo.Find(x => x.Id == assignmentPolicy.PolicyId).AsQueryable().FirstOrDefault();
+                    if (policy != null)
+                    {
+                        if (policy.RiskType == Enums.TypeRisk.High && assignmentPolicy.PercentCoverage > 50)
+                        {
+                            ModelState.AddModelError("", "El porcentaje no puede ser mayor al 50%");
+                        }
+                    }
+                }
+                
+                
                 if (ModelState.IsValid)
                 {
                     _assignmentPolicyRepo.Add(assignmentPolicy);

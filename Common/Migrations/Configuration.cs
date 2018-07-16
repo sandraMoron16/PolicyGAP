@@ -31,7 +31,7 @@ namespace Common.Migrations
                                      new CoverageType() { Id = 1, Name = "Terremoto" },
                                      new CoverageType() { Id = 2, Name = "Incendio" },
                                      new CoverageType() { Id = 3, Name = "Robo" },
-                                       new CoverageType() { Id = 2, Name = "Pérdida" }
+                                       new CoverageType() { Id = 4, Name = "Pérdida" }
                                     );
         }
     }

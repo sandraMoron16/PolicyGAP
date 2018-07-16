@@ -13,6 +13,7 @@ namespace Common.Data
         {
            
             _context = context;
+            
         }
 
         public void Add(T entity)

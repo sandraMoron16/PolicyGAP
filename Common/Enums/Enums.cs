@@ -18,7 +18,7 @@ namespace Common.Enums
         {
             Low,
             Medium,
-            MediumHigh,
+            UpperMedium,
             High
         }
     }

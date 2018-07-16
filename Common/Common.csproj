@@ -32,6 +32,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +50,22 @@
     <Compile Include="Migrations\201807150005583_Initialize.cs" />
     <Compile Include="Migrations\201807150005583_Initialize.Designer.cs">
       <DependentUpon>201807150005583_Initialize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807160003044_v1.cs" />
+    <Compile Include="Migrations\201807160003044_v1.Designer.cs">
+      <DependentUpon>201807160003044_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807160022298_v2.cs" />
+    <Compile Include="Migrations\201807160022298_v2.Designer.cs">
+      <DependentUpon>201807160022298_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161451267_v3.cs" />
+    <Compile Include="Migrations\201807161451267_v3.Designer.cs">
+      <DependentUpon>201807161451267_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161927482_v4.cs" />
+    <Compile Include="Migrations\201807161927482_v4.Designer.cs">
+      <DependentUpon>201807161927482_v4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\ApplicationRole.cs" />
@@ -72,6 +91,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807150005583_Initialize.resx">
       <DependentUpon>201807150005583_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807160003044_v1.resx">
+      <DependentUpon>201807160003044_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807160022298_v2.resx">
+      <DependentUpon>201807160022298_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161451267_v3.resx">
+      <DependentUpon>201807161451267_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161927482_v4.resx">
+      <DependentUpon>201807161927482_v4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

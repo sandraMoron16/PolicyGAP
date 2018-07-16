@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 namespace Common.Data
 {
     public  class PolicyDbContext: IdentityDbContext
-    {    
-
+    {
+        public static PolicyDbContext dbContext;
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<ApplicationRole> ApplicationRole { get; set; }
         public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
@@ -39,7 +39,7 @@ namespace Common.Data
 
         public static PolicyDbContext Create()
         {
-            return new PolicyDbContext();
+            return new PolicyDbContext();           
         }
 
     }

@@ -11,34 +11,34 @@ namespace ServiciosRest.Controllers
 {
     public class ListasController : ApiController
     {
-        private IGenericRepository<Client> _clientRepo;
-        private IGenericRepository<CoverageType> _coverageType;
-     
+       
+        //private IGenericRepository<Client> _clientRepo;
+        private IGenericRepository<CoverageType> _coverageTypeRepo;
         public ListasController()
         {
-            PolicyDbContext policyDbContext = PolicyDbContext.Create();
-            this._clientRepo = new GenericRepository<Client>(policyDbContext);
-            this._coverageType = new GenericRepository<CoverageType>(policyDbContext);
-
+            //this._clientRepo = new GenericRepository<Client>(new Common.Data.PolicyDbContext());
+            this._coverageTypeRepo = new GenericRepository<CoverageType>(new Common.Data.PolicyDbContext());
         }
 
-        // GET: api/Listas
-        [Route("api/Listas/GetClient/")]
-        public IEnumerable<Client> GetClient()
+        public ListasController(IGenericRepository<Client> clientRepo, IGenericRepository<CoverageType> coverateRepo)
         {
-          
-                return _clientRepo.GetAll();
-          
+            //this._clientRepo = clientRepo;
+            this._coverageTypeRepo = coverateRepo;
         }
+
+
+        //// GET: api/Listas
+        //[Route("api/Listas/GetClient/")]
+        //public IEnumerable<Client> GetClient()
+        //{  
+        //    return _clientRepo.GetAll();          
+        //}
 
         // GET: api/Listas
         [Route("api/Listas/GetCoverageType/")]
         public IEnumerable<CoverageType> GetCoverageType()
-        {
-            return _coverageType.GetAll();
-
-        }
-
-      
+        {            
+            return _coverageTypeRepo.GetAll();
+        }      
     }
 }

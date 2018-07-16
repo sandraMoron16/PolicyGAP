@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
+using System.Web.Mvc;
 namespace Common.Model
 {
     public class Policy
@@ -17,14 +16,18 @@ namespace Common.Model
         [Required]
         public int CoverageTime { get; set; }
         [Required]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         [Required]
         public Enums.Enums.TypeRisk RiskType { get; set; }
+        [ForeignKey("CoverageTypeId")]
         public CoverageType CoverageType { get; set; }
+        public int CoverageTypeId { get; set; }
 
-        [ForeignKey("ApplicationUserId")]
-        public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserId { get; set; }
+        [NotMapped]
+        public virtual SelectList ListCoverageType { get; set; }
+        //[ForeignKey("ApplicationUserId")]
+        //public ApplicationUser ApplicationUser { get; set; }
+        //public string ApplicationUserId { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ServiciosRest
 {
@@ -12,7 +13,10 @@ namespace ServiciosRest
             // Configuración y servicios de API web
 
             // Rutas de API web
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -22,7 +26,7 @@ namespace ServiciosRest
 
             config.Routes.MapHttpRoute(
                 name: "ControllerApi",
-                routeTemplate: "api/{controller}/{name}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

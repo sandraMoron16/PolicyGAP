@@ -1,0 +1,113 @@
+<br>
+<div class="container">
+  <button class="btn btn-default" data-toggle="modal" data-target="#modalPolicy">New policy</button>
+  <br>
+  <br>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date start</th>
+          <th>Coverage Time</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of _policyService.listPolicies | async">
+          <td>{{item.Name}}</td>
+          <td>{{item.PolicyStartDate}}</td>
+          <td>{{item.CoverageTime}}</td>
+          <td>{{item.Price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="widget-content">
+  <div class="modal fade" id="modalPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#fff; font-family: 'Exo 2', sans-serif; font-size: 20px; margin-right: 10px; margin-top:6px;">
+          <i class="fa fa-times-circle"></i>
+        </button>
+        <div class="widget">
+          <div class="widget-header ">
+            <h3>Policy</h3>
+          </div>
+        </div>
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"> </h4>
+        </div>
+        <form  (ngsubmit)="guardar(formPolicy)" #formPolicy="ngForm" novalidate="">
+          <div class="modal-body" id="modalIRPEP-container">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-sm-10 control-label">Name</label>
+                  <input id="Name" name="Name" type="text" [(ngModel)]="policy.Name" class="form-control">
+
+                  <!-- <div *ngIf="policyForm.get('Name').errors" class="alert alert-danger">
+                    <div *ngIf="policyForm.get('Name').errors['required']">
+                      Requerido
+                    </div>
+
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-sm-10 control-label">Risk Type</label>
+                  <select name="RiskType" id="RiskType" [(ngModel)]="policy.RiskType" class="form-control">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="UpperMedium">UpperMedium</option>
+                    <option value="High"></option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-sm-10 control-label">Description</label>
+                  <textarea name="Description" [(ngModel)]="policy.Description" id="Description" cols="50" rows="5" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="col-sm-10 control-label">Coverage Type</label>
+                <select name="CoverageType" id="CoverageType" class="form-control" [(ngModel)]="policy.CoverageType">
+                  <option *ngFor="let item of _sharedListService.listCoverageType | async" [value]="item.Id">{{item.Name}}-{{item.Id}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="col-sm-10 control-label">Policy start date</label>
+                <input type="date" name="PolicyStartDate" id="PolicyStartDate" [(ngModel)]="policy.PolicyStartDate" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="col-sm-10 control-label">Coverage Time (Months)</label>
+                <input type="text" name="CoverageTime" id="CoverageTime" [(ngModel)]="policy.CoverageTime" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="col-sm-10 control-label">Price</label>
+                <input type="text" name="Price" [(ngModel)]="policy.Price" id="Price" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" data-dismiss="createLabel" class="btn btn-default" (click)="guardar(formPolicy)">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

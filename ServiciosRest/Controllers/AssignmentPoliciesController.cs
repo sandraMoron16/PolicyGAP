@@ -20,10 +20,23 @@ namespace ServiciosRest.Controllers
             this._policyRepo = new GenericRepository<Policy>(new Common.Data.PolicyDbContext());
 
         }
-        // GET: api/AssignmentPolicies   
-      
-        public HttpResponseMessage AssignmentPolicies(AssignmentPolicy assignmentPolicy)
+
+        [HttpGet]
+        public AssignmentPolicy GetByPolicyId(int id)
         {
+            AssignmentPolicy assignmentPolicy = _assignmentPolicyRepo.Find(x => x.PolicyId == id).AsQueryable().FirstOrDefault();
+            if (assignmentPolicy == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return assignmentPolicy;
+        }
+        // GET: api/AssignmentPolicies   
+      [HttpPost]
+        public HttpResponseMessage Save(AssignmentPolicy assignmentPolicy)
+        {
+            string mensaje = string.Empty;
             try
             {
                 if (assignmentPolicy.PolicyId > 0)
@@ -31,26 +44,28 @@ namespace ServiciosRest.Controllers
                     Policy policy = _policyRepo.Find(x => x.Id == assignmentPolicy.PolicyId).AsQueryable().FirstOrDefault();
                     if (policy != null)
                     {
-                        if (policy.RiskType == Enums.TypeRisk.High && assignmentPolicy.PercentCoverage > 50)
+                        if (policy.RiskType == Enums.TypeRisk.High && assignmentPolicy.PercentCoverage > 50 && assignmentPolicy.State == Enums.State.Assign)
                         {
-                            ModelState.AddModelError("", "El porcentaje no puede ser mayor al 50%");
+                            mensaje = "El porcentaje no puede ser mayor al 50%";
                         }
+                        assignmentPolicy.Id = 0;
                     }
-                }
+                }  
                 
-                
-                if (ModelState.IsValid)
-                {
-                    _assignmentPolicyRepo.Add(assignmentPolicy);
-                    _assignmentPolicyRepo.Save();
+                if(mensaje == string.Empty)
+                { 
+                                    
+                        _assignmentPolicyRepo.Add(assignmentPolicy);
+                        _assignmentPolicyRepo.Save();
 
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, assignmentPolicy);
-                    response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = assignmentPolicy.Id }));
-                    return response;
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, assignmentPolicy);                        
+                        return response;
+                    
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, mensaje);
+                    return response;
                 }
             }
             catch (Exception ex)

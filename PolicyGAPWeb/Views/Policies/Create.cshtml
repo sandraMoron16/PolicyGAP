@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Policy</h4>
         <hr />
@@ -33,13 +33,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PolicyStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PolicyStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PolicyStartDate, new { htmlAttributes = new { @class = "form-control datepicker fecha" } })
                 @Html.ValidationMessageFor(model => model.PolicyStartDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CoverageTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Coverage Time (Months)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CoverageTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CoverageTime, "", new { @class = "text-danger" })
@@ -64,7 +64,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CoverageTypeId, "CoverageTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">              
+            <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CoverageTypeId, Model.ListCoverageType, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CoverageTypeId, "", new { @class = "text-danger" })
             </div>
@@ -81,3 +81,15 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        var today = new Date("01/31/1910");
+        $('.fecha').datepicker({
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+            endDate: 'd',
+            format: 'dd/mm/yyyy'
+        })
+    });
+</script>
+}

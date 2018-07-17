@@ -10,8 +10,8 @@ namespace Common.Enums
     {
         public enum State
         {
-            Assign,
-            Cancel
+            Assign=1,
+            Cancel=2
         }
 
         public enum TypeRisk

@@ -53,31 +53,24 @@ namespace ServiciosRest.Controllers
         [Route("api/Policies/Save/")]
         [HttpPost]
         public HttpResponseMessage Save(Policy policy)
-        {
-            if (policy != null && policy.CoverageTime > 12)
-            {
-                ModelState.AddModelError("", "Solo es hasta 12 meses");
-            }
+        {           
 
             if (ModelState.IsValid)
-            {              
-               
+            {                             
                 _policyRepo.Add(policy);
                 _policyRepo.Save();
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, policy);
-                //response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = policy.Id }));
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, policy);                
                 return response;
             }
             else
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest, policy);
+               return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
 
         // PUT api/Policies/5
-        [Route("api/Policies/Edit/")]
-        [HttpPost]
+        [Route("api/Policies/Edit/")]     
+        [HttpPut]
         public HttpResponseMessage Edit(Policy policy)
         {
             if (!ModelState.IsValid)
